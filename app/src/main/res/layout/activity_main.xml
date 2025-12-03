@@ -69,14 +69,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSub">
 
-                <EditText
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:minHeight="48dp"
-                    android:inputType="number"
-                    tools:text="R$1.000,00"
-                    android:background="@android:color/transparent" />
+                    android:layout_weight="4">
+
+                    <TextView
+                        android:id="@+id/tvFromCurrencySymbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        tools:text ="R$"
+                        android:textSize="16sp"/>
+
+                    <EditText
+                        android:id="@+id/etFromExchangeValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:text="@string/inicial_value_1_000_00"
+                        android:background="@android:color/transparent" />
+
+                </LinearLayout>
+
+
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -115,14 +133,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <EditText
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:minHeight="48dp"
-                    android:inputType="number"
-                    tools:text="R$1.000,00"
-                    android:background="@android:color/transparent" />
+                    android:layout_weight="4">
+
+                    <TextView
+                        android:id="@+id/tvToCurrencySymbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        tools:text ="R$"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/tvToExchangeValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="@string/inicial_value_1_000_00" />
+
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
