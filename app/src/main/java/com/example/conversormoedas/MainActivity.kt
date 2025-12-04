@@ -19,7 +19,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.conversormoedas.databinding.ActivityMainBinding
 import com.example.conversormoedas.databinding.ContenteExchangeRateSucessBinding
 import com.example.conversormoedas.network.model.CurrencyType
+import com.example.conversormoedas.network.model.ExchangeRateResult
 import com.example.conversormoedas.ui.CurrencyTypesAdapter
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.apply {
             launch {
-                viewModel.currencyTypes.collect { result ->
+                viewModel.currencyTypes.collectLatest { result ->
                     result.onSuccess { currencyTypes ->
                         binding.showContentSucess()
                         binding.lExchangeRateSucess.configureCurrencyTypes(currencyTypes = currencyTypes)
@@ -63,13 +65,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             launch {
-                viewModel.exchangeRate.collect { result ->
+                viewModel.exchangeRate.collectLatest { result ->
                     result.onSuccess { exchangeRateResult ->
-                        exchangeRateResult?.let {
-                            binding.showContentSucess()
-                            exchangeRate = it.exchangeRate
-                            binding.lExchangeRateSucess.generateConvertedValue()
+                        if (exchangeRateResult == ExchangeRateResult.empty()) {
+                            return@collectLatest
                         }
+
+                        binding.showContentSucess()
+                        exchangeRate = exchangeRateResult?.exchangeRate
+                        binding.lExchangeRateSucess.generateConvertedValue()
                     }.onFailure {
                         binding.showContentError()
                     }
