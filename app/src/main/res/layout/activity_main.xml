@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -18,159 +18,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        app:cardCornerRadius="8dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="24dp"
-            android:layout_marginHorizontal="16dp">
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/conversor_de_moedas"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvSub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/digite_o_valor_e_escolha_as_moedas_de_convers_o"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
-
-            <LinearLayout
-                android:id="@+id/llFromExchange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:layout_marginTop="36dp"
-                android:weightSum="7"
-                android:gravity="center"
-                android:background="@drawable/bg_rounded_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSub">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4">
-
-                    <TextView
-                        android:id="@+id/tvFromCurrencySymbol"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        tools:text ="R$"
-                        android:textSize="16sp"/>
-
-                    <EditText
-                        android:id="@+id/etFromExchangeValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="48dp"
-                        android:textSize="20sp"
-                        android:inputType="number"
-                        android:text="@string/inicial_value_1_000_00"
-                        android:background="@android:color/transparent" />
-
-                </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
 
+    <include
+        android:id="@+id/lExchangeRateError"
+        layout="@layout/content_exchange_rate_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_divider" />
+    <include
+        android:id="@+id/lExchangeRateSucess"
+        layout="@layout/contente_exchange_rate_sucess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-                <Spinner
-                    android:id="@+id/spnFromExchange"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_currency_type"
-                    android:layout_weight="3" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/ivExchange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrows_exchange"
-                android:layout_margin="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/llToExchange"
-                app:layout_constraintTop_toBottomOf="@+id/llFromExchange" />
-
-            <LinearLayout
-                android:id="@+id/llToExchange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4">
-
-                    <TextView
-                        android:id="@+id/tvToCurrencySymbol"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        tools:text ="R$"
-                        android:textSize="16sp"/>
-
-                    <TextView
-                        android:id="@+id/tvToExchangeValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:text="@string/inicial_value_1_000_00" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_divider" />
-
-                <Spinner
-                    android:id="@+id/spnToExchange"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    tools:listitem="@layout/item_currency_type" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
